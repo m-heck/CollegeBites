@@ -30,3 +30,5 @@ function mergeSort(array, rankBy) {
 function quickSort(array, rankBy) {
 
 }
+
+// HELPER FUNCTION
