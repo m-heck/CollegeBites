@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>College Bites</title>
+    <link rel="stylesheet" href="app/css/style.css">
+  </head>
+  <body>
+    <div id="site">
+    <h1>College Bites</h1>
+    <p>Going to a football game? Visiting a friend? If you're traveling to a college town, make the most of the city. Explore top restaurants, museums, and attractions in the area.</p>
+    <h2>Where are you visiting?</h2>
+    <div class="select-box">
+      <label for="city">University: </label>
+      <br/>
+      <select name="city" id="city">
+        <option value="Philadelphia">University of Pennsylvania</option>
+        <option value="Tuscon">University of Arizona</option>
+        <option value="Tampa">University of Tampa</option>
+        <option value="Nashville">Vanderbilt University</option>
+        <option value="New Orleans">Tulane University</option>
+        <option value="Saint Louis">Washington University in St. Louis</option>
+        <option value="Santa Barbara">University of Calfornia Santa Barbara</option>
+      </select>
+    </div>
+    <div class="select-box">
+      <label for="sort_by">Sort By: </label>
+      <br/>
+      <select name="sort_by" id="sort_by">
+        <option value="Philadelphia">Popularity</option>
+        <option value="Tuscon"># of Stars</option>
+      </select>
+    </div>
+    <button class="button">Search</button>
+  </div>
+  <h2>Results</h2>
+  <a href="./restaurant.html">
+    <div class="box">
+      <h3>Coffee Shop</h3>
+      <p><b>Hours: </b> M-F 9am-5pm</p>
+    </div>
+  </a>
+  <div class="box">
+    <h3>Coffee Shop</h3>
+    <p><b>Hours: </b> M-F 9am-5pm</p>
+  </div>
+  <div class="box">
+    <h3>Coffee Shop</h3>
+    <p><b>Hours: </b> M-F 9am-5pm</p>
+  </div>
+  <script src="app/js/data.js"></script>
+	<script src="app/js/script.js"></script>
+  </body>
+</html>
