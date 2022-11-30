@@ -26,14 +26,14 @@
       <label for="sort_by">Sort By: </label>
       <br/>
       <select name="sort_by" id="sort_by">
-        <option value="Philadelphia">Popularity</option>
-        <option value="Tuscon"># of Stars</option>
+        <option value="Popularity">Popularity</option>
+        <option value="Stars"># of Stars</option>
       </select>
     </div>
-    <button class="button">Search</button>
+    <button class="button" onclick="searchClick()">Search</button>
   </div>
-  <h2>Results</h2>
-  <a href="./restaurant.html">
+  <p id="result"></p>
+  <!-- <a href="./restaurant.html">
     <div class="box">
       <h3>Coffee Shop</h3>
       <p><b>Hours: </b> M-F 9am-5pm</p>
@@ -46,8 +46,53 @@
   <div class="box">
     <h3>Coffee Shop</h3>
     <p><b>Hours: </b> M-F 9am-5pm</p>
-  </div>
+  </div> -->
   <script src="app/js/data.js"></script>
 	<script src="app/js/script.js"></script>
+  <script>
+    function searchClick(){
+       console.log("searchClick was clicked.");
+       let myCity = document.getElementById("city").value;
+       console.log(myCity);
+       let filteredByCity = filterData(myCity); 
+       console.log(filteredByCity);
+
+       let sort = document.getElementById("sort_by").value;
+       
+       if (sort == "Stars"){
+           mergeSortRating(filteredByCity);
+           console.log("Sort by stars");
+           console.log(filteredByCity);
+       } else {
+           quickSortPopularity(filteredByCity);
+           console.log("Sort by popularity");
+           console.log(filteredByCity);
+       }
+       
+       let result = "<h2>Top 10 Results</h2>";
+       for (let i = 0; i < 10; i++){
+        let shopName = filteredByCity[i].name;
+
+        let shopRating = filteredByCity[i].stars;
+        let shopPopularity = filteredByCity[i].review_count;
+
+        let hours = {}; 
+        let hourTxt = "";
+        hours = filteredByCity[i].hours;
+        if (hours != undefined && hours != null) {
+            for (let x in hours) {
+              hourTxt += x + ': ' + hours[x] + "<br> ";
+            }
+            console.log('hourTxt: ' + hourTxt );
+          }
+        
+        result += '<a href="./restaurant.html"><div class="box"><h3>' + 
+          shopName + '</h3><p><b>Rating: </b>' + shopRating + 
+            '</p><p><b>Popularity: </b>' + shopPopularity + '</p><p><b>Hours: </b><br> ' + 
+            hourTxt +'</p></div></a>';
+      }
+      document.getElementById("result").innerHTML = result;
+    }
+  </script>
   </body>
 </html>
