@@ -23,6 +23,18 @@ h1 {
   color: #398c94;
 }
 
+h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 30px;
+  color: black;
+}
+
+.shopName {
+  font-family: "Montserrat", sans-serif;
+  font-size: 30px;
+  color: #398c94;
+}
+
 
 a {
   text-decoration: none;

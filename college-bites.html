@@ -3,6 +3,7 @@
   <head>
     <title>College Bites</title>
     <link rel="stylesheet" href="app/css/style.css">
+    <script src="app/js/UIscript.js"></script>
   </head>
   <body>
     <div id="site">
@@ -38,9 +39,20 @@
         <option value="quick">Quick Sort</option>
       </select>
     </div>
+    <div class="select-box">
+      <label for="top">Result Count: </label>
+      <br/>
+      <select name="top" id="top">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
     <button class="button" onclick="searchClick()">Search</button>
   </div>
   <p id="result"></p>
+  
   <!-- <a href="./restaurant.html">
     <div class="box">
       <h3>Coffee Shop</h3>
@@ -54,53 +66,29 @@
   <div class="box">
     <h3>Coffee Shop</h3>
     <p><b>Hours: </b> M-F 9am-5pm</p>
-  </div> -->
+  </div> 
+<div class="box">
+    <h2>Coffee Shop</h2>
+    <table style="width:100%">
+      <tr>
+        <td><p><b>Rating:</b></p><p><b>Popularity:</b></p><p><b>Address:</b></p></td>
+        <td><b>Hours:</b> 
+          <br>
+          Friday: "11:0-20:30"
+          <br>
+          Monday: "11:0-20:30"
+          <br>
+          Saturday: "12:0-17:0"
+          <br>
+          Thursday: "11:0-20:30"
+          <br>
+          Tuesday: "11:0-20:30"
+          <br>
+          Wednesday: "11:0-20:30"</td>
+      </tr>
+  </div>-->
   <script src="app/js/data.js"></script>
 	<script src="app/js/script.js"></script>
-  <script>
-    function searchClick(){
-       console.log("searchClick was clicked.");
-       let myCity = document.getElementById("city").value;
-       console.log(myCity);
-       let filteredByCity = filterData(myCity); 
-       console.log(filteredByCity);
-
-       let sort = document.getElementById("sort_by").value;
-       
-       if (sort == "Stars"){
-           mergeSortRating(filteredByCity);
-           console.log("Sort by stars");
-           console.log(filteredByCity);
-       } else {
-           quickSortPopularity(filteredByCity);
-           console.log("Sort by popularity");
-           console.log(filteredByCity);
-       }
-       
-       let result = "<h2>Top 10 Results</h2>";
-       for (let i = 0; i < 10; i++){
-        let shopName = filteredByCity[i].name;
-
-        let shopRating = filteredByCity[i].stars;
-        let shopPopularity = filteredByCity[i].review_count;
-
-        let hours = {}; 
-        let hourTxt = "";
-        hours = filteredByCity[i].hours;
-        if (hours != undefined && hours != null) {
-            for (let x in hours) {
-              hourTxt += x + ': ' + hours[x] + "<br> ";
-            }
-            console.log('hourTxt: ' + hourTxt );
-          }
-        
-        result += '<a href="./restaurant.html"><div class="box"><h3>' + 
-          shopName + '</h3><p><b>Rating: </b>' + shopRating + 
-            '</p><p><b>Popularity: </b>' + shopPopularity + '</p><p><b>Hours: </b><br> ' + 
-            hourTxt +'</p></div></a>';
-      }
-      document.getElementById("result").innerHTML = result;
-    }
-  </script>
+  
   </body>
 </html>
