@@ -3,10 +3,10 @@
   <head>
     <title>College Bites</title>
     <link rel="stylesheet" href="app/css/style.css">
-    <script src="app/js/UIscript.js"></script>
   </head>
   <body>
     <div id="site">
+    <img id="university-logo" width="250px"/>
     <h1>College Bites</h1>
     <p>Going to a football game? Visiting a friend? If you're traveling to a college town, make the most of the city. Explore top restaurants, museums, and attractions in the area.</p>
     <h2>Where are you visiting?</h2>
@@ -52,43 +52,179 @@
     <button class="button" onclick="searchClick()">Search</button>
   </div>
   <p id="result"></p>
-  
-  <!-- <a href="./restaurant.html">
-    <div class="box">
-      <h3>Coffee Shop</h3>
-      <p><b>Hours: </b> M-F 9am-5pm</p>
-    </div>
-  </a>
-  <div class="box">
-    <h3>Coffee Shop</h3>
-    <p><b>Hours: </b> M-F 9am-5pm</p>
-  </div>
-  <div class="box">
-    <h3>Coffee Shop</h3>
-    <p><b>Hours: </b> M-F 9am-5pm</p>
-  </div> 
-<div class="box">
-    <h2>Coffee Shop</h2>
-    <table style="width:100%">
-      <tr>
-        <td><p><b>Rating:</b></p><p><b>Popularity:</b></p><p><b>Address:</b></p></td>
-        <td><b>Hours:</b> 
-          <br>
-          Friday: "11:0-20:30"
-          <br>
-          Monday: "11:0-20:30"
-          <br>
-          Saturday: "12:0-17:0"
-          <br>
-          Thursday: "11:0-20:30"
-          <br>
-          Tuesday: "11:0-20:30"
-          <br>
-          Wednesday: "11:0-20:30"</td>
-      </tr>
-  </div>-->
   <script src="app/js/data.js"></script>
 	<script src="app/js/script.js"></script>
-  
+  <script>
+    function searchClick(){
+      //console.log("searchClick was clicked.");
+      let myCity = document.getElementById("city").value;
+
+      h1_color = "black"
+      h2_color = "black"
+      switch(myCity){
+          case "Philadelphia":
+              h1_color = "#9a0100";
+              h2_color = "#01195b";
+              break;
+          case "Tuscon":
+              h1_color = "#002146";
+              h2_color = "#a7051e";
+              break;
+          case "Tampa":
+              h1_color = "black";
+              h2_color = "#c92139";
+              break;
+          case "Nashville":
+              h1_color = "black";
+              h2_color = "#caaa6d";
+              break;
+          case "New Orleans":
+              h1_color = "#295548";
+              h2_color = "#78c6e5";
+              break;
+          case "Saint Louis":
+              h1_color = "#aa0c3a";
+              h2_color = "#026857";
+              break;
+          case "Santa Barbara":
+              h1_color = "#e2a50a";
+              h2_color = "#023258";
+              break;
+      }
+
+      logo_city = {
+          "Philadelphia": "https://branding.web-resources.upenn.edu/sites/default/files/styles/card_3x2/public/2022-03/UniversityofPennsylvania_FullLogo_RGB-4_0.png?h=ab080a2f&itok=tu_jMFEm",
+          "Tuscon": "https://brand.arizona.edu/sites/default/files/styles/uaqs_medium/public/ua_horiz_rgb_4.png?itok=T7TcQ02k",
+          "Tampa": "https://www.ut.edu/Images/logo%403x.png",
+          "Nashville": "https://news.vanderbilt.edu/files/2022-Vanderbilt-University-wordmark.jpg",
+          "New Orleans": "https://communications.tulane.edu/sites/default/files/TUlogo2020.png",
+          "Saint Louis": "https://marcomm.wustl.edu/wp-content/uploads/2015/07/3lineposRGB1000-01-1fuxmn8-e1517349537248-300x246.png",
+          "Santa Barbara": "https://brand.ucsb.edu/sites/default/files/images/pages/Visual-Identity/Marks/Seal/2-color-seal.gif" 
+      }
+
+      document.querySelectorAll("h1").forEach((h1) => {
+          h1.style.color = h1_color;
+      })
+
+      document.querySelectorAll("h2").forEach((h2) => {
+          h2.style.color = h2_color;
+      })
+
+      console.log(logo_city[myCity])
+      document.getElementById("university-logo").src = logo_city[myCity]
+
+      
+
+      //console.log(myCity);
+      let filteredByCity = filterData(myCity); 
+      //console.log(filteredByCity);
+
+      let sort = document.getElementById("sort_by").value;
+
+      let method = document.getElementById("method").value;
+      
+      if (sort == "Stars" && method == "merge"){
+          let start = new Date().getTime();
+          mergeSortRating(filteredByCity);
+          let end = new Date().getTime();
+          let time = end - start;
+          console.log("Merge sort by stars");
+          console.log("Execution Time: " + time + "ms");
+          //console.log(filteredByCity);
+      } else if (sort == "Popularity" && method == "quick"){
+          let start = new Date().getTime();
+          quickSortPopularity(filteredByCity);
+          let end = new Date().getTime();
+          let time = end - start;
+          console.log("Quick sort by popularity");
+          console.log("Execution Time: " + time + "ms");
+          //console.log(filteredByCity);
+      } else if (sort == "Stars" && method == "quick") {
+          let start = new Date().getTime();
+          quickSortRating(filteredByCity);
+          let end = new Date().getTime();
+          let time = end - start;
+          console.log("Quick sort by stars");
+          console.log("Execution Time: " + time + "ms");
+          //console.log(filteredByCity);
+      } else {
+          let start = new Date().getTime();
+          mergeSortPopularity(filteredByCity);
+          let end = new Date().getTime();
+          let time = end - start;
+          console.log("Merge sort by popularity");
+          console.log("Execution Time: " + time + "ms");
+          //console.log(filteredByCity);
+      }
+      
+      let max = document.getElementById("top").value;
+      if (filteredByCity.length < max){
+          max = filteredByCity.length;
+      }
+      let result = "<h2 style='color: "+ h2_color +"'>Top " + max +  " Results (Out of " + filteredByCity.length + " resturaunts/attractions)</h2>";
+      for (let i = 0; i < max; i++){
+       let shopName = filteredByCity[i].name;
+
+       let shopRating = filteredByCity[i].stars;
+       let shopPopularity = filteredByCity[i].review_count;
+       let address = filteredByCity[i].address;
+       let city = filteredByCity[i].city;
+
+       let hours = {}; 
+       let hourTxt = "";
+       hours = filteredByCity[i].hours;
+       if (hours != undefined && hours != null) {
+           for (let x in hours) {
+             hourTxt += x + ': ' + hours[x] + "<br> ";
+           }
+         }
+
+
+      let starImage = starFinder(shopRating);
+       
+      result += '<div class="box"><h2 class="shopName" style="color:'+h2_color+';">' + (i + 1) + '. ' +
+          shopName +'</h2><table style="width:70%"><tr>' + 
+          '<td style="width:70%"><p><b>Rating: </b>' + starImage + '</p><p><b>Popularity: </b>' + shopPopularity + 
+          '</p><p><b>Address: </b> '+ address + ', ' + city + '</p></td><td><b>Hours:</b><br> ' + hourTxt 
+          +'</p></td></tr></table></div>';
+            
+     document.getElementById("result").innerHTML = result;
+      }
+   }
+
+   function starFinder(shopRating){
+      let starImage = "";
+      switch(shopRating) {
+          case 1.0:
+              starImage = '<img src="app/images/1.0s.png" alt="1.0 stars" width="150" height="30"></img>';
+              break;
+          case 1.5:
+              starImage = '<img src="app/images/1.5s.png" alt="1.5 stars" width="150" height="30"></img>';
+              break;
+          case 2.0:
+              starImage = '<img src="app/images/2.0s.png" alt="2.0 stars" width="150" height="30"></img>';
+              break;
+          case 2.5:
+              starImage = '<img src="app/images/2.5s.png" alt="2.5 stars" width="150" height="30"></img>';
+              break;
+          case 3.0:
+              starImage = '<img src="app/images/3s.png" alt="3.0 stars" width="150" height="30"></img>';
+              break;
+          case 3.5:
+              starImage = '<img src="app/images/3.5s.png" alt="3.5 stars" width="150" height="30"></img>';
+              break;
+          case 4.0:
+              starImage = '<img src="app/images/4.0s.png" alt="4.0 stars" width="150" height="30"></img>';
+              break;
+          case 4.5:
+              starImage = '<img src="app/images/4.5s.png" alt="4.5 stars" width="150" height="30"></img>';
+              break;
+          case 5.0:
+              starImage = '<img src="app/images/5s.png" alt="5.0 stars" width="150" height="30"></img>';
+              break;
+      }
+      return starImage;
+   }
+  </script>
   </body>
 </html>
