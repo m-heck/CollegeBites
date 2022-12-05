@@ -53,6 +53,7 @@
   </div>
   <p id="result"></p>
   <script src="app/js/data.js"></script>
+  <script src="app/js/photos.js"></script>
   <script src="app/js/script.js"></script>
   <script>
     // handles what happens after the user clicks the "search" button
@@ -162,31 +163,70 @@
       
       // prepares the html tag to be added to the html file
       let result = "<h2 style='color: "+ h2_color +"'>Top " + max +  " Results (Out of " + filteredByCity.length + " restaurants/attractions)</h2>";
-
+      
+      let count = 1;
       // loops through each item in the filtered data max times
       for (let i = 0; i < max; i++){
        // grabs the correct data from the current javascript object
        let shopName = filteredByCity[i].name;
-       let shopRating = filteredByCity[i].stars;
+       let shopRating = 1.5;
+       shopRating = filteredByCity[i].stars
        let shopPopularity = filteredByCity[i].review_count;
        let address = filteredByCity[i].address;
        let city = filteredByCity[i].city;
+       let businessID = filteredByCity[i].business_id;
+       let photoID = "llVHE0cRXJHphUr3jh6gCg";
+       let photoAvailable = false;
+       
+
+       photos.forEach(element => {
+        if (element["business_id"] == businessID) {
+            photoID = element.photo_id;
+            photoAvailable = true;
+        }
+       });
+
+       if (photoAvailable == false){
+        let index = count%5;
+          switch(index){
+            case 0:
+              photoID = "AZBLfrcomwhs8IXpgvzpMw";
+              break;
+            case 1: 
+              photoID = "iwBNc-vblOqO-AXJih-ELw";
+              break;
+            case 2:
+              photoID = "KfFPjcWdRIn8vg5J4zsWVg";
+              break;
+            case 3: 
+              photoID = "y1aUZ-BgP_e1fQTBMCKsqw";
+              break;
+            case 4:
+              photoID = "c6_KCFwHOYabw08EcGtXLw";
+              break;
+          }
+          count++;
+          console.log(index+ " " + photoID)
+       }
+
+       let imageURL = "https://s3-media0.fl.yelpcdn.com/bphoto/" + photoID + "/1000s.jpg"
+
        let hours = {}; 
        let hourTxt = "";
        hours = filteredByCity[i].hours;
-       // grabs the hours array and appends a new html tag
        if (hours != undefined && hours != null) {
            for (let x in hours) {
              hourTxt += x + ': ' + hours[x] + "<br> ";
            }
          }
        
-         // appends the data to the html tag
-        result += '<div class="box"><h2 class="shopName" style="color:'+h2_color+';">' + (i + 1) + '. ' +
-          shopName +'</h2><table style="width:70%"><tr>' + 
-          '<td style="width:70%"><p><b>Rating: </b><img src="app/images/'+ shopRating +'s.png" width="110px"></img></p><p><b>Review Count: </b>' + shopPopularity + 
-          '</p><p><b>Address: </b> '+ address + ', ' + city + '</p></td><td><b>Hours:</b><br> ' + hourTxt 
-          +'</p></td></tr></table></div>';
+        result += '<div class="box"><table style="width:100%"><tr>' + 
+          '<td style="width:50%; padding-top:0px"><h2 class="shopName" style="color:'+h2_color+';">' + (i + 1) + '. ' +
+          shopName +'</h2><p><b>Rating: </b><img src="app/images/'+ shopRating +
+            's.png" width="110px"></img></p><p><b>Review Count: </b>' + shopPopularity + 
+          '</p><p><b>Address: </b> '+ address + ', ' + city + '</p></td><td style="width:600px"><br><b>Hours:</b><br> ' + hourTxt 
+          +'</p></td><td><img src="'+ imageURL +
+            '" width="200px"></img></td></tr></table></div>';
            
       // sets the new html tag
       document.getElementById("result").innerHTML = result;
