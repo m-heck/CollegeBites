@@ -55,12 +55,13 @@
   <script src="app/js/data.js"></script>
   <script src="app/js/script.js"></script>
   <script>
+    // handles what happens after the user clicks the "search" button
     function searchClick(){
       let myCity = document.getElementById("city").value;
-
       h1_color = "black"
       h2_color = "black"
       
+      // changes the color scheme of the text depending on what college was chosen to the college's colors
       switch(myCity){
           case "Philadelphia":
               h1_color = "#9a0100";
@@ -92,6 +93,7 @@
               break;
       }
 
+      // changes the logo image to the corresponding college logo
       logo_city = {
           "Philadelphia": "https://branding.web-resources.upenn.edu/sites/default/files/styles/card_3x2/public/2022-03/UniversityofPennsylvania_FullLogo_RGB-4_0.png?h=ab080a2f&itok=tu_jMFEm",
           "Tuscon": "https://brand.arizona.edu/sites/default/files/styles/uaqs_medium/public/ua_horiz_rgb_4.png?itok=T7TcQ02k",
@@ -102,6 +104,7 @@
           "Santa Barbara": "https://brand.ucsb.edu/sites/default/files/images/pages/Visual-Identity/Marks/Seal/2-color-seal.gif" 
       }
 
+      // selects the headings and updates the colors
       document.querySelectorAll("h1").forEach((h1) => {
           h1.style.color = h1_color;
       })
@@ -110,14 +113,17 @@
           h2.style.color = h2_color;
       })
 
+      // selects the logos and updates the image
       document.getElementById("university-logo").src = logo_city[myCity]
 
+      // filters the data by the city chosen
       let filteredByCity = filterData(myCity); 
 
+      // stores the sort by and the method parametres based on user
       let sort = document.getElementById("sort_by").value;
-
       let method = document.getElementById("method").value;
       
+      // chooses the correct sorting function based off of filters
       if (sort == "Stars" && method == "merge"){
           let start = new Date().getTime();
           mergeSortRating(filteredByCity);
@@ -148,34 +154,41 @@
           console.log("Execution Time: " + time + "ms");
       }
       
+      // calculates max number of listings to display
       let max = document.getElementById("top").value;
       if (filteredByCity.length < max){
           max = filteredByCity.length;
       }
+      
+      // prepares the html tag to be added to the html file
       let result = "<h2 style='color: "+ h2_color +"'>Top " + max +  " Results (Out of " + filteredByCity.length + " restaurants/attractions)</h2>";
-      for (let i = 0; i < max; i++){
-       let shopName = filteredByCity[i].name;
 
+      // loops through each item in the filtered data max times
+      for (let i = 0; i < max; i++){
+       // grabs the correct data from the current javascript object
+       let shopName = filteredByCity[i].name;
        let shopRating = filteredByCity[i].stars;
        let shopPopularity = filteredByCity[i].review_count;
        let address = filteredByCity[i].address;
        let city = filteredByCity[i].city;
-
        let hours = {}; 
        let hourTxt = "";
        hours = filteredByCity[i].hours;
+       // grabs the hours array and appends a new html tag
        if (hours != undefined && hours != null) {
            for (let x in hours) {
              hourTxt += x + ': ' + hours[x] + "<br> ";
            }
          }
        
+         // appends the data to the html tag
         result += '<div class="box"><h2 class="shopName" style="color:'+h2_color+';">' + (i + 1) + '. ' +
           shopName +'</h2><table style="width:70%"><tr>' + 
           '<td style="width:70%"><p><b>Rating: </b><img src="app/images/'+ shopRating +'s.png" width="110px"></img></p><p><b>Review Count: </b>' + shopPopularity + 
           '</p><p><b>Address: </b> '+ address + ', ' + city + '</p></td><td><b>Hours:</b><br> ' + hourTxt 
           +'</p></td></tr></table></div>';
-            
+           
+      // sets the new html tag
       document.getElementById("result").innerHTML = result;
       }
    }
