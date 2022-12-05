@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>College Bites</title>
+    <title>College Bites: Find Top Restaurants & Attractions</title>
     <link rel="stylesheet" href="app/css/style.css">
   </head>
   <body>
@@ -11,7 +11,7 @@
     <p>Going to a football game? Visiting a friend? If you're traveling to a college town, make the most of the city. Explore top restaurants, museums, and attractions in the area.</p>
     <h2>Where are you visiting?</h2>
     <div class="select-box">
-      <label for="city">University: </label>
+      <label for="city"><b>Choose University: </b></label>
       <br/>
       <select name="city" id="city">
         <option value="Philadelphia">University of Pennsylvania</option>
@@ -24,7 +24,7 @@
       </select>
     </div>
     <div class="select-box">
-      <label for="sort_by">Sort By: </label>
+      <label for="sort_by"><b>Sort By: </b></label>
       <br/>
       <select name="sort_by" id="sort_by">
         <option value="Popularity">Popularity</option>
@@ -32,7 +32,7 @@
       </select>
     </div>
     <div class="select-box">
-      <label for="method">Sort Method: </label>
+      <label for="method"><b>Sort Method: </b></label>
       <br/>
       <select name="method" id="method">
         <option value="merge">Merge Sort</option>
@@ -40,7 +40,7 @@
       </select>
     </div>
     <div class="select-box">
-      <label for="top">Result Count: </label>
+      <label for="top"><b>Result Count: </b></label>
       <br/>
       <select name="top" id="top">
         <option value="5">5</option>
@@ -53,14 +53,14 @@
   </div>
   <p id="result"></p>
   <script src="app/js/data.js"></script>
-	<script src="app/js/script.js"></script>
+  <script src="app/js/script.js"></script>
   <script>
     function searchClick(){
-      //console.log("searchClick was clicked.");
       let myCity = document.getElementById("city").value;
 
       h1_color = "black"
       h2_color = "black"
+      
       switch(myCity){
           case "Philadelphia":
               h1_color = "#9a0100";
@@ -110,14 +110,9 @@
           h2.style.color = h2_color;
       })
 
-      console.log(logo_city[myCity])
       document.getElementById("university-logo").src = logo_city[myCity]
 
-      
-
-      //console.log(myCity);
       let filteredByCity = filterData(myCity); 
-      //console.log(filteredByCity);
 
       let sort = document.getElementById("sort_by").value;
 
@@ -130,7 +125,6 @@
           let time = end - start;
           console.log("Merge sort by stars");
           console.log("Execution Time: " + time + "ms");
-          //console.log(filteredByCity);
       } else if (sort == "Popularity" && method == "quick"){
           let start = new Date().getTime();
           quickSortPopularity(filteredByCity);
@@ -138,7 +132,6 @@
           let time = end - start;
           console.log("Quick sort by popularity");
           console.log("Execution Time: " + time + "ms");
-          //console.log(filteredByCity);
       } else if (sort == "Stars" && method == "quick") {
           let start = new Date().getTime();
           quickSortRating(filteredByCity);
@@ -146,7 +139,6 @@
           let time = end - start;
           console.log("Quick sort by stars");
           console.log("Execution Time: " + time + "ms");
-          //console.log(filteredByCity);
       } else {
           let start = new Date().getTime();
           mergeSortPopularity(filteredByCity);
@@ -154,7 +146,6 @@
           let time = end - start;
           console.log("Merge sort by popularity");
           console.log("Execution Time: " + time + "ms");
-          //console.log(filteredByCity);
       }
       
       let max = document.getElementById("top").value;
@@ -178,53 +169,17 @@
              hourTxt += x + ': ' + hours[x] + "<br> ";
            }
          }
-
-
-      let starImage = starFinder(shopRating);
        
-      result += '<div class="box"><h2 class="shopName" style="color:'+h2_color+';">' + (i + 1) + '. ' +
+        result += '<div class="box"><h2 class="shopName" style="color:'+h2_color+';">' + (i + 1) + '. ' +
           shopName +'</h2><table style="width:70%"><tr>' + 
-          '<td style="width:70%"><p><b>Rating: </b>' + starImage + '</p><p><b>Review Count: </b>' + shopPopularity + 
+          '<td style="width:70%"><p><b>Rating: </b><img src="app/images/'+ shopRating +'s.png" width="110px"></img></p><p><b>Review Count: </b>' + shopPopularity + 
           '</p><p><b>Address: </b> '+ address + ', ' + city + '</p></td><td><b>Hours:</b><br> ' + hourTxt 
           +'</p></td></tr></table></div>';
             
-     document.getElementById("result").innerHTML = result;
+      document.getElementById("result").innerHTML = result;
       }
    }
-
-   function starFinder(shopRating){
-      let starImage = "";
-      switch(shopRating) {
-          case 1.0:
-              starImage = '<img src="app/images/1.0s.png" alt="1.0 stars" width="150" height="30"></img>';
-              break;
-          case 1.5:
-              starImage = '<img src="app/images/1.5s.png" alt="1.5 stars" width="150" height="30"></img>';
-              break;
-          case 2.0:
-              starImage = '<img src="app/images/2.0s.png" alt="2.0 stars" width="150" height="30"></img>';
-              break;
-          case 2.5:
-              starImage = '<img src="app/images/2.5s.png" alt="2.5 stars" width="150" height="30"></img>';
-              break;
-          case 3.0:
-              starImage = '<img src="app/images/3s.png" alt="3.0 stars" width="150" height="30"></img>';
-              break;
-          case 3.5:
-              starImage = '<img src="app/images/3.5s.png" alt="3.5 stars" width="150" height="30"></img>';
-              break;
-          case 4.0:
-              starImage = '<img src="app/images/4.0s.png" alt="4.0 stars" width="150" height="30"></img>';
-              break;
-          case 4.5:
-              starImage = '<img src="app/images/4.5s.png" alt="4.5 stars" width="150" height="30"></img>';
-              break;
-          case 5.0:
-              starImage = '<img src="app/images/5s.png" alt="5.0 stars" width="150" height="30"></img>';
-              break;
-      }
-      return starImage;
-   }
+    
   </script>
   </body>
 </html>
