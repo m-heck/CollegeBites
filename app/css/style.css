@@ -58,17 +58,23 @@ label {
 
 .select-box {
   padding: 10px;
+  float: left;
+}
+
+#result-count {
+  float: none;
 }
 
 .button {
   padding: 20px;
   width: 100px;
   background-color: #60dbe7;
-  border: 2px solid rgba(0,0,0,.3);
+  border: 5px solid rgba(0,0,0,.3);
   font-family: "Montserrat", sans-serif;
-  border-radius: 60px;
-  color: white;
+  border-radius: 5px;
+  color: rgba(0,0,0,.6);
   cursor: pointer;
+  font-weight: 800;
 }
 
 th, td {
