@@ -6,7 +6,6 @@
   </head>
   <body>
     <div id="site">
-    <img id="university-logo" width="250px"/>
     <h1>College Bites</h1>
     <p>Going to a football game? Visiting a friend? If you're traveling to a college town, make the most of the city. Explore top restaurants, museums, and attractions in the area.</p>
     <h2>Where are you visiting?</h2>
@@ -66,43 +65,32 @@
       switch(myCity){
           case "Philadelphia":
               h1_color = "#9a0100";
-              h2_color = "#01195b";
+              h2_color = "#01195C";
               break;
           case "Tuscon":
-              h1_color = "#002146";
-              h2_color = "#a7051e";
+              h1_color = "#032244";
+              h2_color = "#AB061F";
               break;
           case "Tampa":
               h1_color = "black";
-              h2_color = "#c92139";
+              h2_color = "#C92139";
               break;
           case "Nashville":
               h1_color = "black";
-              h2_color = "#caaa6d";
+              h2_color = "#D9BA7E";
               break;
           case "New Orleans":
               h1_color = "#295548";
-              h2_color = "#78c6e5";
+              h2_color = "#78C6E5";
               break;
           case "Saint Louis":
-              h1_color = "#aa0c3a";
-              h2_color = "#026857";
+              h1_color = "#346F5D";
+              h2_color = "#4DAACF";
               break;
           case "Santa Barbara":
-              h1_color = "#e2a50a";
+              h1_color = "#E2A50A";
               h2_color = "#023258";
               break;
-      }
-
-      // changes the logo image to the corresponding college logo
-      logo_city = {
-          "Philadelphia": "https://branding.web-resources.upenn.edu/sites/default/files/styles/card_3x2/public/2022-03/UniversityofPennsylvania_FullLogo_RGB-4_0.png?h=ab080a2f&itok=tu_jMFEm",
-          "Tuscon": "https://brand.arizona.edu/sites/default/files/styles/uaqs_medium/public/ua_horiz_rgb_4.png?itok=T7TcQ02k",
-          "Tampa": "https://www.ut.edu/Images/logo%403x.png",
-          "Nashville": "https://news.vanderbilt.edu/files/2022-Vanderbilt-University-wordmark.jpg",
-          "New Orleans": "https://communications.tulane.edu/sites/default/files/TUlogo2020.png",
-          "Saint Louis": "https://marcomm.wustl.edu/wp-content/uploads/2015/07/3lineposRGB1000-01-1fuxmn8-e1517349537248-300x246.png",
-          "Santa Barbara": "https://brand.ucsb.edu/sites/default/files/images/pages/Visual-Identity/Marks/Seal/2-color-seal.gif" 
       }
 
       // selects the headings and updates the colors
@@ -113,9 +101,6 @@
       document.querySelectorAll("h2").forEach((h2) => {
           h2.style.color = h2_color;
       })
-
-      // selects the logos and updates the image
-      document.getElementById("university-logo").src = logo_city[myCity]
 
       // filters the data by the city chosen
       let filteredByCity = filterData(myCity); 
