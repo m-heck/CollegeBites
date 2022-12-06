@@ -58,6 +58,11 @@ label {
 
 .select-box {
   padding: 10px;
+  float: left;
+}
+
+#result-count {
+  float: none;
 }
 
 .button {
