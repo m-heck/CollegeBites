@@ -40,7 +40,7 @@ University Logos:
 - 3.5 stars: https://commons.wikimedia.org/wiki/File:3.5_stars.svg
 - 3.0 stars: https://commons.wikimedia.org/wiki/File:3_stars.svg
 - 2.5 stars: https://commons.wikimedia.org/wiki/File:2.5_stars.svg
-- 2.0 stars: https://commons.wikimedia.org/wiki/File:2.5_stars.svg
+- 2.0 stars: https://commons.wikimedia.org/wiki/File:Star_rating_2_of_5.png
 - 1.5 stars: https://commons.wikimedia.org/wiki/File:1.5_stars.svg
 - 1.0 stars: https://commons.wikimedia.org/wiki/File:1_stars.svg
 - Images Used for each attraction are found on yelp.
