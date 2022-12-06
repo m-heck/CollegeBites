@@ -21,10 +21,6 @@ The two algorithms we will use to represent the data are quick sort and merge so
 
 We used JavaScript arrays to hold each JSON object for ease of access. Arrays held the bulk of our actual data and were also used in the actual implementation of quick and merge sort. In order to filter the relevant data points by city, we used a basic linear search algorithm on our data array.
 
-## Files
-__college-bites.html__ is the main website html file
-__restaurant.html__ is a page we designed to display individual business listings, but has not been implemented into our code
-
 ## Image Credits
 - 5.0 stars: https://commons.wikimedia.org/wiki/File:Star_rating_5_of_5.png
 - 4.5 stars: https://commons.wikimedia.org/wiki/File:4.5_stars.svg
